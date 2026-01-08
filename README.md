@@ -75,9 +75,9 @@ pip install "numpy<2.0.0"
 ### Example 1: Single Document Classification
 
 ```python
-from src.ocr_classifier import OCRClassifier90
+from src.ocr_classifier import OCRClassifier
 
-classifier = OCRClassifier90()
+classifier = OCRClassifier()
 classifier.load_model()
 
 notice = """
@@ -172,8 +172,8 @@ This repository contains the implementation of an ensemble-based machine learnin
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/ocr-notice-classifier.git
-cd ocr-notice-classifier
+git clone https://github.com/chakrabt/OCR-Notice-Classifier.git
+cd OCR-Notice-Classifier
 
 # Create virtual environment (recommended)
 python -m venv venv
@@ -183,31 +183,21 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### Download Pre-trained Model
-
-**Option 1: From Releases** (Recommended)
-```bash
-# Download from GitHub Releases
-# Or use this command:
-wget https://github.com/yourusername/ocr-notice-classifier/releases/download/v1.0.0/models.zip
-unzip models.zip
-```
-
-**Option 2: Train Your Own Model**
+**Train Your Own Model**
 ```python
-from src.ocr_classifier import OCRClassifier90
+from src.ocr_classifier import OCRClassifier
 
-classifier = OCRClassifier90()
+classifier = OCRClassifier()
 classifier.train_production_model('path/to/your/train_data.csv')
 ```
 
 ### Basic Usage
 
 ```python
-from src.ocr_classifier import OCRClassifier90
+from src.ocr_classifier import OCRClassifier
 
 # Load pre-trained model
-classifier = OCRClassifier90()
+classifier = OCRClassifier()
 classifier.load_model()
 
 # Classify a notice
@@ -330,9 +320,9 @@ extracted_text,category
 ### Train the Model
 
 ```python
-from src.ocr_classifier import OCRClassifier90
+from src.ocr_classifier import OCRClassifier
 
-classifier = OCRClassifier90()
+classifier = OCRClassifier()
 classifier.train_production_model('path/to/train_data.csv')
 ```
 
@@ -402,8 +392,6 @@ All experiments are fully reproducible:
 - **Hardware:** Intel i7-12700, 16GB RAM, CPU-only
 - **Cross-Validation:** 5-fold stratified
 
-See `docs/methodology.md` for complete experimental setup.
-
 ---
 
 ## Model Files
@@ -423,10 +411,10 @@ Pre-trained model files are available upon request:
 ### Option 1: REST API
 ```python
 from flask import Flask, request, jsonify
-from src.ocr_classifier import OCRClassifier90
+from src.ocr_classifier import OCRClassifier
 
 app = Flask(__name__)
-classifier = OCRClassifier90()
+classifier = OCRClassifier()
 classifier.load_model()
 
 @app.route('/classify', methods=['POST'])
@@ -442,9 +430,9 @@ if __name__ == '__main__':
 ### Option 2: Batch Processing
 ```python
 import pandas as pd
-from src.ocr_classifier import OCRClassifier90
+from src.ocr_classifier import OCRClassifier
 
-classifier = OCRClassifier90()
+classifier = OCRClassifier()
 classifier.load_model()
 
 # Read notices from CSV
