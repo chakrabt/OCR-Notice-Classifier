@@ -122,7 +122,7 @@ if result['confidence_score'] < CONFIDENCE_THRESHOLD:
                            key=lambda x: x[1], reverse=True)[:3]:
         print(f"  - {cat}: {prob:.1%}")
 else:
-    print(f"✓ High confidence - auto-route to {result['category']}")
+    print(f" High confidence - auto-route to {result['category']}")
 ```
 
 ### Example 4: Custom Integration
@@ -348,12 +348,12 @@ classifier.train_production_model('path/to/train_data.csv')
 
 ```
 python >= 3.8
-scikit-learn >= 1.0
-xgboost >= 1.5
-imbalanced-learn >= 0.9
-pandas >= 1.3
-numpy >= 1.21
-joblib >= 1.1
+scikit-learn>=1.0.0,<1.3.0
+xgboost>=1.5.0,<3.0.0
+imbalanced-learn>=0.9.0,<1.0.0
+pandas>=1.3.0,<3.0.0
+numpy>=1.21.0,<2.0.0
+joblib>=1.1.0,<2.0.
 ```
 
 Install all dependencies:
@@ -530,7 +530,7 @@ A: Yes! See [Deployment Options](#deployment-options) for REST API, batch proces
 A: Unfortunately no. The dataset contains institutional notices that may include personally identifiable information. However, the methodology is fully documented for replication on your own data.
 
 **Q: How do I prepare my own dataset?**  
-A: You need a CSV with two columns: `extracted_text` (OCR-extracted notice text) and `category` (examination/admission/circular/event). See `docs/dataset_preparation.md` for details.
+A: You need a CSV with two columns: `extracted_text` (OCR-extracted notice text) and `category` (examination/admission/circular/event). 
 
 **Q: What about data privacy in deployment?**  
 A: All processing is local - no data is sent to external services. If deploying as a web service, implement appropriate authentication and encryption.
