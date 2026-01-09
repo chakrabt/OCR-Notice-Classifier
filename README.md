@@ -3,11 +3,12 @@ Ensemble-Based 4-Class OCR Document Classification for University Notices
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![Paper](https://img.shields.io/badge/paper-Applied%20Computing%20%26%20Informatics-brightgreen)](link-to-paper-when-published)
+[![GitHub stars](https://img.shields.io/github/stars/yourusername/ocr-notice-classifier?style=social)](https://github.com/yourusername/ocr-notice-classifier)
 
 > **Paper:** "Ensemble-Based 4-Class OCR Document Classification for University Notices"  
 > **Authors:** Tamal Chakraborty  
 > **Institution:** Department of Computer Science, Mrinalini Datta Mahavidyapith, Kolkata, India  
-> **Status:** Submitted to *Applied Computing and Informatics*
 
 ---
 
@@ -21,8 +22,7 @@ FileNotFoundError: Model not found! Train model first...
 ```
 
 **Solution:**
-- Download pre-trained models from [Releases](https://github.com/yourusername/ocr-notice-classifier/releases)
-- Or train your own: `classifier.train_production_model('train_data.csv')`
+- train your own: `classifier.train_production_model('train_data.csv')`
 - Ensure model files are in the project root directory
 
 **Issue 2: XGBoost installation fails**
@@ -64,8 +64,6 @@ pip install "numpy<2.0.0"
 
 ### Getting Help
 
-- **Bug Reports:** [Open an issue](https://github.com/yourusername/ocr-notice-classifier/issues)
-- **Questions:** Check [Discussions](https://github.com/yourusername/ocr-notice-classifier/discussions)
 - **Email:** tamalc@gmail.com
 
 ---
@@ -334,7 +332,7 @@ classifier.train_production_model('path/to/train_data.csv')
 
 ```
 ├── src/
-│   ├── ocr_classifier.py          # Main classifier (OCRClassifier90)
+│   ├── ocr_classifier.py          # Main classifier (OCRClassifier)
 │
 ├── examples/
 │   ├── demo_usage.py              # Quick start examples
@@ -374,8 +372,7 @@ If you use this code in your research, please cite our paper:
 @article{chakraborty2025ocr,
   title={Ensemble-Based 4-Class OCR Document Classification for University Notices},
   author={Chakraborty, Tamal},
-  journal={Applied Computing and Informatics},
-  year={2025},
+  year={2026},
   note={Submitted}
 }
 ```
@@ -397,10 +394,10 @@ All experiments are fully reproducible:
 ## Model Files
 
 Pre-trained model files are available upon request:
-- `ocr_90_model.pkl` (450MB) - Trained ensemble
-- `ocr_90_vectorizer.pkl` - TF-IDF vectorizer
-- `ocr_90_encoder.pkl` - Label encoder
-- `ocr_90_metadata.pkl` - Model metadata
+- `ocr_model.pkl` (450MB) - Trained ensemble
+- `ocr_vectorizer.pkl` - TF-IDF vectorizer
+- `ocr_encoder.pkl` - Label encoder
+- `ocr_metadata.pkl` - Model metadata
 
 **Note:** Due to size constraints, model files are not included in the repository. Please contact the author to obtain them.
 
