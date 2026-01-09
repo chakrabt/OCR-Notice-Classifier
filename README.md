@@ -115,7 +115,7 @@ result = classifier.predict(ambiguous_notice)
 CONFIDENCE_THRESHOLD = 0.80
 
 if result['confidence_score'] < CONFIDENCE_THRESHOLD:
-    print("⚠️  Low confidence - flag for manual review")
+    print("Low confidence - flag for manual review")
     print(f"Top alternatives:")
     
     for cat, prob in sorted(result['probabilities_raw'].items(), 
