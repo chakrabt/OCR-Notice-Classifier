@@ -3,7 +3,7 @@ Ensemble-Based 4-Class OCR Document Classification for University Notices
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/ocr-notice-classifier?style=social)](https://github.com/yourusername/ocr-notice-classifier)
+[![GitHub stars](https://img.shields.io/github/stars/yourusername/ocr-notice-classifier?style=social)](https://github.com/chakrabt/OCR-Notice-Classifier)
 
 > **Paper:** "Ensemble-Based 4-Class OCR Document Classification for University Notices"  
 > **Authors:** Tamal Chakraborty  
