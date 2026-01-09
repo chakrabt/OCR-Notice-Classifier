@@ -14,7 +14,7 @@ Category Distribution:
 
 ================================================================================
 
----
+===== NOTICE 1: EXAMINATION =====
 
 NOTICE - SEMESTER END EXAMINATION SCHEDULE
 
@@ -55,7 +55,7 @@ Phone: +91-XXXX-XXXXXX
 Controller of Examinations
 University Name
 
----
+===== NOTICE 2: ADMISSION =====
 
 ADMISSION NOTIFICATION - POSTGRADUATE PROGRAMS 2025-26
 
@@ -104,58 +104,35 @@ Helpline: +91-XXXX-XXXXXX (10 AM - 5 PM, Monday to Friday)
 Registrar
 University Name
 
----
+===== NOTICE 3: CIRCULAR =====
 
-CIRCULAR NO. 234/2024 - REVISED ATTENDANCE POLICY
+CIRCULAR NO. 234/2024 - STUDENT IDENTITY CARD POLICY
 
 Date: 1st September 2024
-Ref: ACAD/POLICY/2024/234
+Ref: FACULT/STUD/2024/234
 
-To: All Faculty Members, Heads of Departments, and Students
+To: All Students, Faculty Members, and Heads of Departments
 
-Subject: Implementation of Revised Attendance Policy for Academic Year 2024-25
+Subject: Circular - Revised Policy for Student Identity Cards : Academic Year 2024-25
 
-This is to notify all concerned that the Academic Council, in its meeting 
-held on 25th August 2024, has approved the following revisions to the 
-student attendance policy, effective from the current academic session:
+This is to notify all concerned that the following revised guidelines for 
+student identity cards have been approved by the administration and will be 
+implemented with immediate effect.
 
-1. MINIMUM ATTENDANCE REQUIREMENT:
-   Students must maintain a minimum of 75% attendance in each course to be 
-   eligible to appear in the semester end examinations. This applies to both 
-   theory and practical courses.
+All students must obtain their official university identity cards within 
+one month of enrollment. Identity cards are mandatory for accessing campus 
+ facilities including library, laboratories, and administrative offices.
 
-2. CONDONATION OF ATTENDANCE:
-   Students with attendance between 65% and 75% may apply for condonation 
-   on medical or other genuine grounds. Applications must be submitted with 
-   supporting documents to the Head of Department within 15 days.
+This circular supersedes all previous notifications regarding student 
+identity cards.
 
-3. MONITORING AND REPORTING:
-   - Attendance will be recorded for each lecture/practical session
-   - Monthly attendance reports will be generated and shared with students
-   - Parents/guardians will be notified if attendance falls below 70%
-
-4. CONSEQUENCES OF LOW ATTENDANCE:
-   Students with less than 65% attendance will not be permitted to appear 
-   in examinations and may be required to repeat the semester.
-
-5. GRIEVANCE REDRESSAL:
-   Any grievances regarding attendance records should be reported to the 
-   respective course instructor within 7 days of the monthly report.
-
-All faculty members are hereby directed to maintain accurate attendance 
-records using the university attendance management system. Department heads 
-must ensure strict compliance with this policy.
-
-This policy supersedes all previous attendance-related notifications and 
-circulars.
-
-For any clarifications, please contact the Dean's Office.
+For any queries or clarifications, please contact the Administration Office.
 
 By Order,
 Registrar
 University Name
 
----
+===== NOTICE 4: EVENT =====
 
 WORKSHOP ANNOUNCEMENT - ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING
 
@@ -212,7 +189,7 @@ All are invited to participate and benefit from this learning opportunity!
 Head, Department of Computer Science
 University Name
 
----
+===== NOTICE 5: EXAMINATION (HALL TICKET) =====
 
 EXAMINATION HALL TICKET - IMPORTANT INSTRUCTIONS
 
