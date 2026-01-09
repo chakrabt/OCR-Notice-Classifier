@@ -1,7 +1,7 @@
 # Minimal requirements for OCR Notice Classifier
 # Install: pip install -r requirements.txt
 
-scikit-learn>=1.0.0,<2.0.0
+scikit-learn>=1.0.0,<1.3.0
 xgboost>=1.5.0,<3.0.0
 imbalanced-learn>=0.9.0,<1.0.0
 pandas>=1.3.0,<3.0.0
