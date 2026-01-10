@@ -407,7 +407,7 @@ If you use this code in your research, please cite our paper:
 
 All experiments are fully reproducible:
 
-- **Dataset:** 683 notices from Indian universities
+- **Dataset:** 555 balanced notices (from 1,228 OCR-extracted documents)
 - **Train/Test Split:** 80/20 stratified (444 train, 111 test)
 - **Random Seed:** 42 (for all operations)
 - **Hardware:** Intel i7-12700, 16GB RAM, CPU-only
