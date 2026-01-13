@@ -312,7 +312,6 @@ Training:
 ### Cross-Validation
 - **Mean Accuracy:** 91.2% ± 1.3%
 - **Statistical Significance:** p < 0.001 (McNemar's test)
-- **95% Confidence Interval:** [89.2%, 94.6%]
 
 ### Ablation Study
 
