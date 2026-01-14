@@ -10,6 +10,12 @@ Ensemble-Based 4-Class OCR Document Classification for University Notices
 > **Institution:** Department of Computer Science, Mrinalini Datta Mahavidyapith, Kolkata, India  
 
 ---
+## Documentation
+
+- **[Feature Engineering Details](FEATURES.md)** - Complete specifications for all 35 handcrafted features
+- **[Deployment Guide](DEPLOYMENT.md)** - Production deployment instructions, integration examples, and monitoring
+- **[Quick Start Guide](README.md)** - Installation and basic usage
+
 
 ## Troubleshooting
 
