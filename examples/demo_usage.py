@@ -4,7 +4,7 @@ Demo Usage Examples for OCR Notice Classifier
 This script demonstrates various usage patterns for the OCR-based
 university notice classification system.
 
-Paper: "Ensemble-Based 4-Class OCR Document Classification for University Notices"
+Paper: "Ensemble-Based Classification of OCR-Extracted University Notices: A Weighted Voting Approach with Domain-Aware Feature Engineering"
 Author: Tamal Chakraborty
 """
 
