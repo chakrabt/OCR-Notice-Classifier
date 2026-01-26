@@ -1,11 +1,11 @@
 # OCR-Notice-Classifier
-Ensemble-Based 4-Class OCR Document Classification for University Notices
+Ensemble-Based Classification of OCR-Extracted University Notices: A Weighted Voting Approach with Domain-Aware Feature Engineering
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![GitHub stars](https://img.shields.io/github/stars/chakrabt/OCR-Notice-Classifier?style=social)](https://github.com/chakrabt/OCR-Notice-Classifier)
 
-> **Paper:** "Ensemble-Based 4-Class OCR Document Classification for University Notices"  
+> **Paper:** "Ensemble-Based Classification of OCR-Extracted University Notices: A Weighted Voting Approach with Domain-Aware Feature Engineering"  
 > **Authors:** Tamal Chakraborty  
 > **Institution:** Department of Computer Science, Mrinalini Datta Mahavidyapith, Kolkata, India  
 
@@ -162,7 +162,7 @@ This repository contains the implementation of an ensemble-based machine learnin
 
 - **91.89% Accuracy** on held-out test set
 - **35 Domain-Specific Features** engineered for university notices
-- **Stacking Ensemble** (RF + GB + XGBoost + LR)
+- **Voting Ensemble** (RF + GB + XGBoost + LR)
 - **CPU-Only Operation** (no GPU required)
 - **Fast Inference** (42ms per document)
 - **Production-Ready** codebase
@@ -287,18 +287,36 @@ Our approach combines **12,000 TF-IDF features** with **35 handcrafted domain-sp
 ### Ensemble Configuration
 
 ```
-Level 1 Base Learners:
-├── Random Forest (n=800 trees, depth=15)
-├── Gradient Boosting (n=300, lr=0.08)
-└── XGBoost (n=400, lr=0.10)
-
-Level 2 Meta-Learner:
-└── Logistic Regression (C=0.5, balanced)
-
-Training:
-├── SMOTE balancing (444 → 636 samples)
-├── 3-fold stacking
-└── 5-fold cross-validation
+├── Random Forest
+│   ├── Trees: 1000
+│   ├── Max depth: 20
+│   ├── Min samples split: 3
+│   ├── Feature sampling: √p per split
+│   ├── Class weighting: balanced
+│   └── Voting weight: 3
+│
+├── Gradient Boosting
+│   ├── Iterations: 400
+│   ├── Learning rate: 0.05
+│   ├── Max depth: 5
+│   ├── Subsample ratio: 0.8
+│   ├── Loss: multinomial deviance
+│   └── Voting weight: 2
+│
+├── XGBoost
+│   ├── Iterations: 500
+│   ├── Learning rate: 0.07
+│   ├── Max depth: 5
+│   ├── Subsample ratio: 0.8
+│   ├── Objective: multi:softmax
+│   └── Voting weight: 3
+│
+└── Logistic Regression
+├── Regularization: L2 (C=2.0)
+├── Solver: LBFGS
+├── Max iterations: 2000
+├── Class weighting: balanced
+└── Voting weight: 1
 ```
 
 ---
@@ -321,13 +339,17 @@ Training:
 
 ### Ablation Study
 
-| Component Removed | Accuracy | Δ |
-|------------------|----------|---|
-| **None (Full Model)** | 91.89% | — |
-| Engineered Features | 86.5% | -5.39% |
-| Stacking Ensemble | 87.1% | -4.79% |
-| SMOTE Balancing | 88.4% | -3.49% |
-| 5-class (with Holiday) | 84.7% | -7.19% |
+|Configuration|Accuracy|Macro-F1|Δ Accuracy (pp)|Δ Macro-F1 (pp)|Train Time (s)|
+|Voting Ensemble (Proposed)|0.9189|0.9129|—|—|—|
+|TF-IDF+Features+XGBoost|0.9099|0.9003|-0.90|-1.26|57.5|
+|TF-IDF+Gradient Boosting|0.9009|0.8983|-1.80|-1.46|360.5|
+|Stacking Ensemble|0.9009|0.8926|-1.80|-2.03|—|
+|TF-IDF+Features+Gradient Boosting|0.8919|0.8876|-2.70|-2.53|344.9|
+|TF-IDF+XGBoost|0.8829|0.8669|-3.60|-4.60|72.6|
+|TF-IDF+Features+SMOTE+Random Forest|0.87390.8670|-4.50|-4.59|3.3|
+|TF-IDF+Features+Random Forest|0.8649|0.8521-5.40|-6.08|2.8|
+|TF-IDF+Random Forest|0.8108|0.8071|-10.81|-10.58|2.2|
+|TF-IDF+Logistic Regression|0.7838|0.7843|-13.51|-12.86|2.0|
 
 ---
 
