@@ -339,17 +339,18 @@ Our approach combines **12,000 TF-IDF features** with **35 handcrafted domain-sp
 
 ### Ablation Study
 
-|Configuration|Accuracy|Macro-F1|Δ Accuracy (pp)|Δ Macro-F1 (pp)|Train Time (s)|
-|Voting Ensemble (Proposed)|0.9189|0.9129|—|—|—|
-|TF-IDF+Features+XGBoost|0.9099|0.9003|-0.90|-1.26|57.5|
-|TF-IDF+Gradient Boosting|0.9009|0.8983|-1.80|-1.46|360.5|
-|Stacking Ensemble|0.9009|0.8926|-1.80|-2.03|—|
-|TF-IDF+Features+Gradient Boosting|0.8919|0.8876|-2.70|-2.53|344.9|
-|TF-IDF+XGBoost|0.8829|0.8669|-3.60|-4.60|72.6|
-|TF-IDF+Features+SMOTE+Random Forest|0.87390.8670|-4.50|-4.59|3.3|
-|TF-IDF+Features+Random Forest|0.8649|0.8521-5.40|-6.08|2.8|
-|TF-IDF+Random Forest|0.8108|0.8071|-10.81|-10.58|2.2|
-|TF-IDF+Logistic Regression|0.7838|0.7843|-13.51|-12.86|2.0|
+| Configuration | Accuracy | Macro-F1 | Δ Accuracy (pp) | Δ Macro-F1 (pp) | Train Time (s) |
+|---------------|----------|----------|-----------------|-----------------|----------------|
+| Voting Ensemble (Proposed) | 0.9189 | 0.9129 | — | — | — |
+| TF-IDF+Features+XGBoost | 0.9099 | 0.9003 | -0.90 | -1.26 | 57.5 |
+| TF-IDF+Gradient Boosting | 0.9009 | 0.8983 | -1.80 | -1.46 | 360.5 |
+| Stacking Ensemble | 0.9009 | 0.8926 | -1.80 | -2.03 | — |
+| TF-IDF+Features+Gradient Boosting | 0.8919 | 0.8876 | -2.70 | -2.53 | 344.9 |
+| TF-IDF+XGBoost | 0.8829 | 0.8669 | -3.60 | -4.60 | 72.6 |
+| TF-IDF+Features+SMOTE+Random Forest | 0.8739 | 0.8670 | -4.50 | -4.59 | 3.3 |
+| TF-IDF+Features+Random Forest | 0.8649 | 0.8521 | -5.40 | -6.08 | 2.8 |
+| TF-IDF+Random Forest | 0.8108 | 0.8071 | -10.81 | -10.58 | 2.2 |
+| TF-IDF+Logistic Regression | 0.7838 | 0.7843 | -13.51 | -12.86 | 2.0 |
 
 ---
 
