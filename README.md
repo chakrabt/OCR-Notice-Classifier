@@ -392,6 +392,8 @@ classifier.train_production_model('path/to/train_data.csv')
 |
 ├── requirements.txt               # Dependencies
 ├── LICENSE                        # MIT License
+├── deployment.md                  # Deployment Readiness Analysis
+├── fatures.md                     # Details of 35 handcrafted features for Notice Classification
 └── README.md                      # This file
 ```
 
