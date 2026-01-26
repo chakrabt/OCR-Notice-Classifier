@@ -238,22 +238,22 @@ python examples/demo_usage.py
 
 ---
 ## Sample Notices Performance
+The included sample notices demonstrate realistic and well-calibrated classifier behavior across different administrative categories. 
 
-The included sample notices demonstrate realistic classifier behavior:
+| Notice Type                 | Predicted Category | Confidence | Analysis                                                                        |
+| --------------------------- | ------------------ | ---------- | ------------------------------------------------------------------------------- |
+| Exam Schedule               | Examination        | 96.6%      | **Excellent** — highly distinctive examination terminology and structural cues  |
+| PG Admission Notification   | Admission          | 86.5%      | **Good** — multi-stage admission process with mixed procedural vocabulary       |
+| Identity Card Circular      | Circular           | 77.0%      | **Moderate** — generic administrative language with limited lexical specificity |
+| AI/ML Workshop Announcement | Event              | 86.5%      | **Very Good** — clear event-related indicators with minor academic overlap      |
+| Hall Ticket Instructions    | Examination        | 96.2%      | **Excellent** — strong, unambiguous examination-specific terminology            |
 
-| Notice Type | Confidence | Analysis |
-|------------|-----------|----------|
-| Exam Schedule | 96.4% | Excellent - distinctive terminology |
-| PG Admission | 71.7% | Good - complex multi-program notice |
-| Identity Card Circular | 93.3% | Excellent - strong structural markers |
-| AI/ML Workshop | 90.7% | Excellent - clear event indicators |
-| Hall Ticket | 96.0% | Excellent - highly distinctive |
+**Note:**
+Lower confidence values for certain notice types—particularly admission and circular notices—reflect the inherent linguistic characteristics of these categories rather than classification errors. Admission notices often describe multiple programs, eligibility rules, counseling procedures, and schedules, resulting in diverse vocabulary and reduced lexical purity. Simpler admission notices (e.g., “Merit List Published” or “Counseling Schedule Released”) typically achieve confidence scores in the 85–95% range.
 
-**Note:** The admission notice shows lower confidence (71.7%) because it 
-covers multiple programs and procedures (MA, MSc, MCom, MCA) with diverse 
-vocabulary. Simpler admission notices (e.g., "Merit List Published") 
-typically achieve 85-95% confidence. All predictions remain reliable for 
-automated routing.
+Circular notices similarly exhibit lower confidence due to their short length and generic administrative phrasing, which overlaps with other notice types. Importantly, the classifier remains correct in all predictions, and the confidence values provide meaningful signals for downstream handling.
+
+Overall, the results demonstrate that the proposed OCR Notice Classifier is accurate, confidence-aware, and suitable for automated routing, while appropriately flagging less distinctive notices for cautious interpretation or optional manual review.
 
 **Confidence Thresholds:**
 - ≥85%: Auto-route with high confidence
