@@ -1,6 +1,6 @@
 # Feature Engineering Documentation
 
-**Project:** Ensemble-Based OCR Document Classification for University Notices  
+**Project:** Ensemble-Based Classification of OCR-Extracted University Notices: A Weighted Voting Approach with Domain-Aware Feature  
 **Author:** Tamal Chakraborty  
 **Repository:** https://github.com/chakrabt/OCR-Notice-Classifier
 
@@ -726,7 +726,7 @@ Language-specific adaptations needed:
 ## References
 
 For complete methodology and ablation studies, see:
-- **Paper:** "Ensemble-Based Four-Class OCR Document Classification for University Notices"
+- **Paper:** "Ensemble-Based Classification of OCR-Extracted University Notices: A Weighted Voting Approach with Domain-Aware Feature"
 - **Repository:** https://github.com/chakrabt/OCR-Notice-Classifier
 - **Contact:** tamalc@gmail.com
 
