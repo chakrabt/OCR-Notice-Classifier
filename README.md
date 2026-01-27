@@ -519,7 +519,7 @@ If you use this code in your research, please cite our paper:
          A Weighted Voting Approach with Domain-Aware Feature Engineering},
   author={Chakraborty, Tamal},
   journal={Journal of Computer Science and Technology},
-  year={2025},
+  year={2026},
   note={Submitted}
 }
 ```
