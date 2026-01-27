@@ -313,11 +313,11 @@ Base Learners (4 models):
 │   └── Voting weight: 3
 │
 └── Logistic Regression
-├── Regularization: L2 (C=2.0)
-├── Solver: LBFGS
-├── Max iterations: 2000
-├── Class weighting: balanced
-└── Voting weight: 1
+    ├── Regularization: L2 (C=2.0)
+    ├── Solver: LBFGS
+    ├── Max iterations: 2000
+    ├── Class weighting: balanced
+    └── Voting weight: 1
 
 Voting Mechanism:
 ├── Type: Soft voting (probability averaging)
