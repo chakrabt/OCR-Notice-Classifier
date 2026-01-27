@@ -287,6 +287,7 @@ Our approach combines **12,000 TF-IDF features** with **35 handcrafted domain-sp
 ### Ensemble Configuration (Architecture: Weighted Soft Voting)
 
 ```
+Base Learners (4 models):
 ├── Random Forest
 │   ├── Trees: 1000
 │   ├── Max depth: 20
