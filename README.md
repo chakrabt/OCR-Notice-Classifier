@@ -375,7 +375,7 @@ Training Pipeline:
 - vs BERT: +10.8 pp accuracy, 44% faster, CPU-only
 - vs Stacking: +1.8 pp accuracy, 39% faster, simpler architecture
 - vs CNN-BiLSTM: +25.2 pp accuracy, avoids severe overfitting
-- 
+  
 ### Ablation Study
 
 | Configuration | Accuracy | Δ Accuracy (pp) | Analysis |
