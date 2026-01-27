@@ -416,7 +416,6 @@ All experiments are fully reproducible:
 
 ### Training Configuration
 ```python
-# Exact configuration from paper
 config = {
     'random_forest': {
         'n_estimators': 1000,
