@@ -164,7 +164,7 @@ This repository contains the implementation of an ensemble-based machine learnin
 - **35 Domain-Specific Features** engineered for university notices
 - **Voting Ensemble** (RF + GB + XGBoost + LR)
 - **CPU-Only Operation** (no GPU required)
-- **Fast Inference** (42ms per document)
+- **Fast Inference** (356ms per document)
 - **Production-Ready** codebase
 
 ---
@@ -284,7 +284,7 @@ Our approach combines **12,000 TF-IDF features** with **35 handcrafted domain-sp
 4. Keyword: admission (0.81)
 5. Year tokens (0.78)
 
-### Ensemble Configuration
+### Ensemble Configuration (Architecture: Weighted Soft Voting)
 
 ```
 ├── Random Forest
@@ -317,8 +317,26 @@ Our approach combines **12,000 TF-IDF features** with **35 handcrafted domain-sp
 ├── Max iterations: 2000
 ├── Class weighting: balanced
 └── Voting weight: 1
-```
 
+Voting Mechanism:
+├── Type: Soft voting (probability averaging)
+├── Weights: [3, 2, 1, 3] for [RF, GB, LR, XGB]
+├── Optimization: 5-fold CV grid search over {1,2,3}⁴ (81 configs)
+└── Criterion: Maximizes macro-F1 score
+
+Training Pipeline:
+├── Data Split: 80/20 stratified (444 train / 111 test)
+├── SMOTE: k=3, balancing (444 → 636 samples)
+├── Feature Extraction: 12,035-dim (TF-IDF + custom features)
+├── Base Learner Training: Each model trained independently
+├── Weight Optimization: 5-fold CV to select [3,2,1,3]
+└── Final Prediction: Weighted probability aggregation
+```
+**Key Difference from Stacking:**
+- ✓ No meta-learner (single-stage ensemble)
+- ✓ Direct probability aggregation with fixed weights
+- ✓ Faster inference (356ms vs 583ms for stacking)
+- ✓ Better performance (+1.8 pp over stacking)
 ---
 
 ## Performance
@@ -331,28 +349,101 @@ Our approach combines **12,000 TF-IDF features** with **35 handcrafted domain-sp
 | Circular | 95.7% | 84.6% | 89.8% | 26 |
 | Event | 77.3% | 100.0% | 87.2% | 17 |
 | Examination | 92.7% | 95.0% | 93.8% | 40 |
-| **Overall** | **92.86%** | **91.89%** | **91.99%** | **111** |
+| **Overall** | **92.9%** | **91.9%** | **92.0%** | **111** |
+
+**Overall Accuracy:** 91.89%
+**Macro-F1:** 0.9129
+**95% CI:** [89.2%, 94.6%]
 
 ### Cross-Validation
-- **Mean Accuracy:** 91.2% ± 1.3%
-- **Statistical Significance:** p < 0.001 (McNemar's test)
+- **Mean Accuracy:** 91.2% ± 1.3% (SD)
+- **Statistical Significance:** p < 0.001 (McNemar's test vs BERT)
+- **Stability:** Low variance indicates robust generalization
 
+### Comparison with Baselines
+
+| Model | Accuracy | Macro-F1 | Inference (ms) |
+|-------|----------|----------|----------------|
+| **Voting Ensemble (Ours)** | **91.89%** | **0.9129** | **356.3** |
+| Stacking Ensemble | 90.09% | 0.8926 | 582.9 |
+| BERT-base (fine-tuned) | 81.08% | 0.8004 | 639.4 |
+| CNN-BiLSTM | 66.67% | 0.6533 | 63.2 |
+| TF-IDF + Logistic Regression | 78.38% | 0.7843 | 8.1 |
+
+**Advantages over baselines:**
+- vs BERT: +10.8 pp accuracy, 44% faster, CPU-only
+- vs Stacking: +1.8 pp accuracy, 39% faster, simpler architecture
+- vs CNN-BiLSTM: +25.2 pp accuracy, avoids severe overfitting
+- 
 ### Ablation Study
 
-| Configuration | Accuracy | Macro-F1 | Δ Accuracy (pp) | Δ Macro-F1 (pp) | Train Time (s) |
-|---------------|----------|----------|-----------------|-----------------|----------------|
-| Voting Ensemble (Proposed) | 0.9189 | 0.9129 | — | — | — |
-| TF-IDF+Features+XGBoost | 0.9099 | 0.9003 | -0.90 | -1.26 | 57.5 |
-| TF-IDF+Gradient Boosting | 0.9009 | 0.8983 | -1.80 | -1.46 | 360.5 |
-| Stacking Ensemble | 0.9009 | 0.8926 | -1.80 | -2.03 | — |
-| TF-IDF+Features+Gradient Boosting | 0.8919 | 0.8876 | -2.70 | -2.53 | 344.9 |
-| TF-IDF+XGBoost | 0.8829 | 0.8669 | -3.60 | -4.60 | 72.6 |
-| TF-IDF+Features+SMOTE+Random Forest | 0.8739 | 0.8670 | -4.50 | -4.59 | 3.3 |
-| TF-IDF+Features+Random Forest | 0.8649 | 0.8521 | -5.40 | -6.08 | 2.8 |
-| TF-IDF+Random Forest | 0.8108 | 0.8071 | -10.81 | -10.58 | 2.2 |
-| TF-IDF+Logistic Regression | 0.7838 | 0.7843 | -13.51 | -12.86 | 2.0 |
+| Configuration | Accuracy | Δ Accuracy (pp) | Analysis |
+|---------------|----------|-----------------|----------|
+| **Voting Ensemble (Full)** | **91.89%** | **—** | **Proposed method** |
+| TF-IDF+Features + XGBoost | 90.99% | -0.90 | Best single learner |
+| TF-IDF + Gradient Boosting | 90.09% | -1.80 | Matches stacking |
+| Stacking Ensemble | 90.09% | -1.80 | 2-stage architecture |
+| TF-IDF+Features + GB | 89.19% | -2.70 | — |
+| **TF-IDF + XGBoost** | **88.29%** | **-3.60** | **No domain features** |
+| TF-IDF+Features+SMOTE + RF | 87.39% | -4.50 | — |
+| TF-IDF+Features + RF | 86.49% | -5.40 | — |
+| TF-IDF + Random Forest | 81.08% | -10.81 | — |
+| TF-IDF + Logistic Regression | 78.38% | -13.51 | Baseline |
+
+**Key Insights:**
+- **Feature engineering contribution:** Comparing TF-IDF+XGB (88.29%) vs TF-IDF+Features+XGB (90.99%) → **+2.70 pp**
+- **Voting advantage:** Voting (91.89%) vs best single learner (90.99%) → **+0.90 pp**
+- **Voting vs Stacking:** Voting (91.89%) vs Stacking (90.09%) → **+1.80 pp** with 39% faster inference
 
 ---
+
+## Reproducibility 
+
+All experiments are fully reproducible:
+
+- **Dataset:** 555 notices across 4 categories (Examination, Admission, Circular, Event)
+  - Original collection: 1,316 PDFs from Indian universities
+  - After OCR cleaning: 1,228 usable texts
+  - After filtering: 690 documents (5 categories)
+  - Final dataset: 555 documents (4 categories, Holiday excluded)
+- **Train/Test Split:** 80/20 stratified (444 train, 111 test)
+- **SMOTE Balancing:** 444 → 636 training samples
+- **Random Seed:** 42 (for all operations)
+- **Hardware:** Intel i7-12700, 16GB RAM, CPU-only
+- **Cross-Validation:** 5-fold stratified
+- **Training Time:** ~12 minutes per full training run
+
+### Training Configuration
+```python
+# Exact configuration from paper
+config = {
+    'random_forest': {
+        'n_estimators': 1000,
+        'max_depth': 20,
+        'min_samples_split': 3,
+        'class_weight': 'balanced'
+    },
+    'gradient_boosting': {
+        'n_estimators': 400,
+        'learning_rate': 0.05,
+        'max_depth': 5,
+        'subsample': 0.8
+    },
+    'xgboost': {
+        'n_estimators': 500,
+        'learning_rate': 0.07,
+        'max_depth': 5,
+        'subsample': 0.8
+    },
+    'logistic_regression': {
+        'C': 2.0,
+        'solver': 'lbfgs',
+        'max_iter': 2000,
+        'class_weight': 'balanced'
+    },
+    'voting_weights': [3, 2, 1, 3]  # [RF, GB, LR, XGB]
+}
+```
 
 ## Training Your Own Model
 
@@ -424,24 +515,51 @@ If you use this code in your research, please cite our paper:
 
 ```bibtex
 @article{chakraborty2025ocr,
-  title={Ensemble-Based 4-Class OCR Document Classification for University Notices},
+  title={Ensemble-Based Classification of OCR-Extracted University Notices:
+         A Weighted Voting Approach with Domain-Aware Feature Engineering},
   author={Chakraborty, Tamal},
-  year={2026},
+  journal={Journal of Computer Science and Technology},
+  year={2025},
   note={Submitted}
 }
 ```
 
 ---
 
-## Reproducibility
+## Why Weighted Voting Over Stacking?
 
-All experiments are fully reproducible:
+Our experiments compared both approaches:
 
-- **Dataset:** 555 balanced notices (from 1,228 OCR-extracted documents)
-- **Train/Test Split:** 80/20 stratified (444 train, 111 test)
-- **Random Seed:** 42 (for all operations)
-- **Hardware:** Intel i7-12700, 16GB RAM, CPU-only
-- **Cross-Validation:** 5-fold stratified
+| Aspect | Weighted Voting (Ours) | Stacking |
+|--------|------------------------|----------|
+| **Architecture** | Single-stage | Two-stage (meta-learner) |
+| **Training** | Independent base learners | Meta-learner requires CV |
+| **Inference** | 356ms | 583ms (+64%) |
+| **Accuracy** | 91.89% | 90.09% (-1.8 pp) |
+| **Macro-F1** | 0.9129 | 0.8926 (-2.03 pp) |
+| **Interpretability** | Direct weight influence | Black-box meta-learner |
+| **Risk** | No error propagation | Cascading errors possible |
+
+**Decision:** Weighted voting provides superior performance with simpler architecture and faster inference, making it ideal for production deployment.
+
+---
+
+## Performance Benchmarks 
+
+| System | Accuracy | Inference Time | Hardware | Notes |
+|--------|----------|----------------|----------|-------|
+| **Ours (Voting)** | **91.89%** | **356ms/doc** | **CPU** | **Production-ready** |
+| Stacking | 90.09% | 583ms/doc | CPU | Our comparison |
+| BERT-base | 81.08% | 639ms/doc | GPU | Fine-tuned 3 epochs |
+| CNN-BiLSTM | 66.67% | 63ms/doc | GPU | Severe overfitting |
+| TF-IDF + LR | 78.38% | 8ms/doc | CPU | Baseline |
+
+**Key Advantages:**
+- ✓ Highest accuracy among all tested methods
+- ✓ CPU-only operation (no GPU required)
+- ✓ Real-time processing capability (<400ms)
+- ✓ Production-stable (no overfitting)
+- ✓ Interpretable feature importance
 
 ---
 
@@ -497,25 +615,12 @@ df.to_csv('classified_notices.csv', index=False)
 
 ---
 
-## Performance Benchmarks
-
-| System | Accuracy | Inference Time | Hardware |
-|--------|----------|---------------|----------|
-| **Ours** | **91.89%** | **42ms/doc** | **CPU** |
-| TF-IDF + LR | 76.6% | 15ms/doc | CPU |
-| BERT-base | ~83-86% | 180ms/doc | GPU |
-| TrOCR + XGBoost | ~85-87% | 250ms/doc | GPU |
-
----
-
 ## Limitations
 
 - **Test set size:** 111 samples (modest but cross-validated)
 - **Language:** English-only (multilingual support planned)
 - **Domain:** University notices (generalizable to similar admin documents)
 - **OCR quality:** Tested on moderate-quality scans (not severely degraded)
-
-See paper Section 4.10 and 5.4 for detailed discussion.
 
 ---
 
@@ -565,13 +670,10 @@ A: Yes! The code is released under MIT License, which permits commercial use. Pl
 ### Technical Questions
 
 **Q: Why 91.89% accuracy and not higher?**  
-A: The remaining 8.11% errors are primarily from genuinely ambiguous notices (e.g., "Circular regarding exam schedule" could be both). See Section 4.7 of the paper for detailed error analysis.
+A: The remaining 8.11% errors are primarily from genuinely ambiguous notices (e.g., "Circular regarding exam schedule" could be both). 
 
 **Q: Can I add more categories?**  
 A: Yes, but you'll need to retrain the model with labeled data for your new categories. The feature engineering approach is generalizable.
-
-**Q: How much training data do I need?**  
-A: Our learning curve analysis (Figure 3 in paper) suggests stable performance with 60-70% of our dataset (~300-350 samples). Minimum recommended: 50 samples per category.
 
 **Q: Do I need a GPU?**  
 A: No! The system runs efficiently on CPU-only hardware. Training takes ~12 minutes on a standard laptop.
