@@ -95,17 +95,6 @@ The following components have been developed and tested:
    - Class: `OCRClassifier`
    - Methods: `predict()`, `predict_batch()`, `load_model()`, `train_production_model()`
 
-### 📊 Performance Characteristics
-
-| Metric | Value | Notes |
-|--------|-------|-------|
-| Test Accuracy | 91.89% | n=111 held-out test set |
-| Inference Latency | 42 ms/doc | Single-threaded, CPU |
-| Throughput | ~1,200 docs/min | Batch processing |
-| Memory Footprint | ~520 MB | During inference |
-| Training Time | ~12 minutes | On Intel Ultra 5-125H CPU |
-| Model Size | ~450 MB | All artifacts combined |
-
 ---
 
 ## Integration Pathways
